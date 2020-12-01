@@ -49,7 +49,7 @@ namespace TvPlusGame.DataAccess.Migrations
                         new
                         {
                             Id = "29bd76db-5835-406d-ad1d-7a0901447c18",
-                            ConcurrencyStamp = "ab0a587d-be2f-42f2-9eea-a6f60e703097",
+                            ConcurrencyStamp = "20602904-a2cf-4c80-a2bc-a5551fd91f38",
                             Name = "Player",
                             NormalizedName = "PLAYER"
                         });
@@ -179,6 +179,9 @@ namespace TvPlusGame.DataAccess.Migrations
                     b.Property<DateTime>("ExpiredDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsArchived")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -277,7 +280,7 @@ namespace TvPlusGame.DataAccess.Migrations
                             AccessFailedCount = 0,
                             BirthYear = 0,
                             Coins = 0,
-                            ConcurrencyStamp = "f8796445-771d-4f1c-b7de-caa396587dec",
+                            ConcurrencyStamp = "e7ae871a-23af-42c7-a7b0-1b50061ffc48",
                             Email = "player@player.com",
                             EmailConfirmed = false,
                             Gender = 0,
@@ -285,10 +288,10 @@ namespace TvPlusGame.DataAccess.Migrations
                             Name = "Player",
                             NormalizedEmail = "PLAYER@PLAYER.COM",
                             NormalizedUserName = "PLAYER",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMTqnQvQeZ8fv/yHj3lF/94PoPbEedVJc1wlNYCPdDeZkS7aTfpAbkd7AvovJzctoA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEFDQGJxqFWNpdQDSvEjkrj3SQxbrghpNnPpJ4Osb/+OgZYUhlgVPDZJqgbZiFRjtgQ==",
                             PhoneNumberConfirmed = false,
                             RegisterDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SecurityStamp = "5f95adf5-99cf-4860-b580-65d72fb3a1d8",
+                            SecurityStamp = "d1917162-40c5-465d-8824-112b7cc8297a",
                             TwoFactorEnabled = false,
                             UserName = "player"
                         });

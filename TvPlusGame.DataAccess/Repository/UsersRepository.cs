@@ -27,7 +27,7 @@ namespace TvPlusGame.DataAccess.Repository
         Task<bool> UserNameExists(string username, string id = null);
         Task<bool> EmailExists(string email, string id = null);
         Task<UserDto> UploadUserImage(string id, IFormFile file);
-        Task<UserDto> GetUserByUserName(string userName);
+        Task<User> GetUserByUserName(string userName);
 
     }
     public class UsersRepository : IUsersRepository
@@ -221,11 +221,10 @@ namespace TvPlusGame.DataAccess.Repository
             return userDto;
         }
 
-        public async Task<UserDto> GetUserByUserName(string userName)
+        public async Task<User> GetUserByUserName(string userName)
         {
             var user = await _userManager.FindByNameAsync(userName.ToLower());
-            var userDto = _mapper.Map<UserDto>(user);
-            return userDto;
+            return user;
         }
 
         //public async Task<UserDto>

@@ -20,7 +20,6 @@ namespace TvPlusGame.Web.Controllers
 
         public IActionResult Index()
         {
-            var a = "test commit";
             return View();
         }
 

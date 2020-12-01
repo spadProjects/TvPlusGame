@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -17,6 +18,11 @@ namespace TvPlusGame.DataAccess.Repository
         {
             _context = context;
             _mapper = mapper;
+        }
+
+        public GameSetting GetCurrentGame()
+        {
+            return _context.GameSettings.FirstOrDefault(g => g.IsArchived == false);
         }
     }
 }

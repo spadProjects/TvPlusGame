@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using TvPlusGame.DataAccess.Repository;
 using TvPlusGame.DataAccess.Services;
 using TvPlusGame.DataAccess.Wrappers;
+using TvPlusGame.Model.Entity;
 
 namespace TvPlusGame.Web.Controllers.Api.V1
 {
@@ -18,11 +19,10 @@ namespace TvPlusGame.Web.Controllers.Api.V1
             _repo = repo;
         }
         [HttpGet]
-        [Route("finishgame")]
+        [Route("FinishGame")]
         public async Task<IActionResult> FinishGame()
         {
-            var games = await _repo.GetAll();
-            var game = games.FirstOrDefault();
+            var game = _repo.GetCurrentGame();
             if(game == null)
                 return Ok(new Response<dynamic>() { Message = "بازی پیدا نشد" });
             game.EndGame = true;
@@ -30,19 +30,24 @@ namespace TvPlusGame.Web.Controllers.Api.V1
             return Ok(new Response<dynamic>(game) { Message = "بازی با موفقیت پایان یافت" });
         }
         [HttpGet]
-        [Route("startgame")]
+        [Route("StartGame")]
         public async Task<IActionResult> StartGame()
         {
-            var games = await _repo.GetAll();
-            var game = games.FirstOrDefault();
-            if (game == null)
-                return StatusCode(StatusCodes.Status500InternalServerError,
-                    new Response<IActionResult>() {Succeeded = false, Message = "بازی پیدا نشد"});
-
-            game.EndGame = false;
-            game.ExpiredDate = DateTime.Now.AddMinutes(30);
-            await _repo.Update(game);
-            return Ok(new Response<dynamic>(game) { Message = "بازی با موفقیت شروع شد زمان باقی مانده تا پایان 30 دقیقه" });
+            var game = _repo.GetCurrentGame();
+            if (game != null)
+            {
+                game.EndGame = true;
+                game.IsArchived = true;
+                await _repo.Update(game);
+            }
+            var newGame = new GameSetting()
+            {
+                EndGame = false,
+                IsArchived = false,
+                ExpiredDate = DateTime.Now.AddMinutes(30)
+            };
+            await _repo.Add(newGame);
+            return Ok(new Response<dynamic>(newGame) { Message = "بازی با موفقیت شروع شد زمان باقی مانده تا پایان 30 دقیقه" });
         }
     }
 }

@@ -10,5 +10,6 @@ namespace TvPlusGame.Model.Entity
         public bool IsDeleted { get; set; }
         public DateTime ExpiredDate { get; set; }
         public bool EndGame { get; set; }
+        public bool IsArchived { get; set; }
     }
 }
