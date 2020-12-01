@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TvPlusGame.DataAccess\TvPlusGame.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Authorization\" />
+    <Folder Include="Filter\" />
+    <Folder Include="Logging\" />
+    <Folder Include="Exception\" />
+    <Folder Include="Common\" />
+    <Folder Include="Service\" />
+    <Folder Include="Validation\" />
+  </ItemGroup>
+
+</Project>
