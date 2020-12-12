@@ -33,21 +33,21 @@ namespace TvPlusGame.Web.Controllers.Api.V1
         {
             var token = await _repo.Login(user);
             if (token == null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response<IActionResult>() { Succeeded = false, Message = "نام یا رمز عبور وارد شده صحیح نیست" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new LogInResponse<IActionResult>() {IsAccepted = false, Succeeded = false, Message = "نام یا رمز عبور وارد شده صحیح نیست" });
             var gameSetting = _gameRepo.GetCurrentGame();
 
             if (gameSetting == null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response<IActionResult>() { Succeeded = false, Message = "بازی پیدا نشد" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new LogInResponse<IActionResult>() {IsAccepted = true, Succeeded = false, Message = "بازی پیدا نشد" });
 
             if (DateTime.Compare(DateTime.Now,gameSetting.ExpiredDate) >= 0  || gameSetting.EndGame == true)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response<IActionResult>() { Succeeded = false, Message = "بازی پایان یافته" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new LogInResponse<IActionResult>() { IsAccepted = true, Succeeded = false, Message = "بازی پایان یافته" });
 
             var userToken = new
             {
                 token = new JwtSecurityTokenHandler().WriteToken(token),
                 expiration = token.ValidTo
             };
-            return Ok(new Response<dynamic>(userToken) { Message = "توکن با موفقیت صادر شد" });
+            return Ok(new LogInResponse<dynamic>(userToken) { Message = "توکن با موفقیت صادر شد" });
         }
         [HttpPost]
         [Route("Register")]

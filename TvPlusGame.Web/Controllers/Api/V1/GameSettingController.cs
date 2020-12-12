@@ -11,6 +11,8 @@ using TvPlusGame.Model.Entity;
 
 namespace TvPlusGame.Web.Controllers.Api.V1
 {
+    [Route("api/v1/[controller]")]
+    [ApiController]
     public class GameSettingController : BaseController
     {
         private readonly GameSettingRepository _repo;

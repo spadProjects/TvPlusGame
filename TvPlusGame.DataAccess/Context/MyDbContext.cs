@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,9 @@ namespace TvPlusGame.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().Property(x => x.UserName).HasMaxLength(22);
+            modelBuilder.Entity<User>().Property(x => x.NormalizedUserName).HasMaxLength(22);
+
             modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
         }

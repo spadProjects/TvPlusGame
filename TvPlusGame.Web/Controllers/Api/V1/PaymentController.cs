@@ -8,6 +8,8 @@ using TvPlusGame.DataAccess.Wrappers;
 
 namespace TvPlusGame.Web.Controllers.Api.V1
 {
+    [Route("api/v1/[controller]")]
+    [ApiController]
     public class PaymentController : BaseController
     {
         public PaymentController(IUriService uriService) : base(uriService)
